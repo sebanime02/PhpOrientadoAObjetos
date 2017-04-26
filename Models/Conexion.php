@@ -9,11 +9,11 @@ class Conexion
 		"db" => "proyecto"
 	);
 	private $con;
-
+		
 
   //Barra invertida en mysqli para que interprete como clase global
 	public function __construct()
-	{
+	{	
 		$this->con = new \mysqli(
 			$this->datos['host'],
 			$this->datos['user'],
@@ -25,10 +25,14 @@ class Conexion
 	public function consultaSimple($sql)
 	{
 		$this->con->query($sql);
+		
 	}
 	public function consultaRetorno($sql)
 	{
 		$datos = $this->con->query($sql);
+		
+		return $datos;
+
 	}
 
 }

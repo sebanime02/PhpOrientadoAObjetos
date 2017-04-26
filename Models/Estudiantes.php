@@ -27,7 +27,7 @@
 
 		public function hola()
 		{
-			echo "HOLA";
+			echo "HOLA</br>";
 			echo $this->id;
 		}
 
@@ -66,11 +66,13 @@
 		}
 		public function view()
 		{
-			//$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.idsection = t2.id WHERE id = '{$this->id}' ";
-			$sql="SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.id_seccion= t2.id WHERE t1.id=1 ";
+			$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.idsection = t2.id WHERE t1.id = '{$this->id}' ";
+			
 			$datos = $this->con->consultaRetorno($sql);
 			$row = mysqli_fetch_assoc($datos);
-			return $row['nombre'];
+		
+			return $row;
+			
 		}
 
 
