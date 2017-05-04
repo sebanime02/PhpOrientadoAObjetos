@@ -1,4 +1,3 @@
-
 <?php namespace Models;
 
 	class Seccion
@@ -25,7 +24,21 @@
 		{
 			$sql = "SELECT * FROM secciones";
 			$datos = $this->con->consultaRetorno($sql);
-			return $datos;
+			
+			if(mysqli_num_rows($datos) > 0)
+			{
+			while($row = mysqli_fetch_assoc($datos))
+			{
+				 $array[] = $row;
+			}
+			return $array;
+			}else
+			{
+
+			return '';
+			}
+			
+	
 		}
 		public function add()
 		{
@@ -34,22 +47,17 @@
 		}
 
 
-		public function listar()
-		{
-			$sql = "SELECT * FROM secciones";
-			$datos = $this->con->consultaRetorno($sql);
-			return $datos;
-
-		}
+		
 		public function delete()
 		{
 			$sql = "DELETE FROM secciones WHERE id ='{$this->id}' "; 
 			$this->con->consultaRetorno($sql);
 
 		}
-		public function edit()
+		public function editar()
 		{
-			$sql = "UPDATE FROM secciones SET nombre = '{$this->nombre}' WHERE id = '{$this->id}'"
+			$sql = "UPDATE FROM secciones SET nombre = '{$this->nombre}' WHERE id = '{$this->id}'";
+			$this->con->consultaSimple($sql);
 		}
 		public function view()
 		{

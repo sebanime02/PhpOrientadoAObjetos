@@ -33,5 +33,4 @@
 			return $this->argumento;
 		}
 	}
-
-	?>
+?>

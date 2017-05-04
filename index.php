@@ -5,7 +5,8 @@ define('URL', "http://localhost/phpPOO/PhpOrientadoAObjetos/");
 
 require_once "Config/Autoload.php";
 
-Config\Autoload::run();
+$autoload = new Config\Autoload;
+$autoload->run();
 
 /*
 $est= new Models\Estudiantes();

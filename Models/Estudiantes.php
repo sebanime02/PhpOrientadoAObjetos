@@ -10,6 +10,7 @@
 		private $id_seccion;
 		private $fecha;
 		private $con;
+		
 
 		public function __construct()
 		{
@@ -44,12 +45,25 @@
 		{
 			$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.idsection = t2.id";
 			$datos = $this->con->consultaRetorno($sql);
-			return $datos;
+			if(mysqli_num_rows($datos) > 0)
+			{
+			while($row = mysqli_fetch_assoc($datos))
+			{
+				 $array[] = $row;
+			}
+			return $array;
+			}else
+			{
+
+			return '';
+			}
 		}
 		public function add()
 		{
-			$sql = "INSERT INTO estudiantes(id, nombre, edad, promedio, imagen, idsection, fecha) VALUES (null, '{$this->nombre}','{$this->edad}','{$this->promedio}'.'{$this->imagen}','{$this->id_seccion}', NOW())";
-
+			
+			$sql = "INSERT INTO estudiantes(id,nombre,edad,promedio,imagen,idsection,fecha) 
+   			VALUES (null,'$this->nombre','$this->edad','$this->promedio','$this->imagen','$this->id_seccion', '" .date("Y-m-d H:i:s"). "')";
+   	
 			$this->con->consultaSimple($sql);
 
 		}
@@ -59,20 +73,18 @@
 			$sql = "DELETE from estudiantes WHERE id ='{$this->id}'";
 			$this->con->consultaSimple($sql);
 		}
-		public function edit()
+		public function editar()
 		{
-			$sql = "UPDATE estudiantes SET nombre = '{$this->nombre}', edad ='{$this->edad}', promedio='{$this->promedio}', idsection = '{$this->id_seccion}'";
+			$sql = "UPDATE estudiantes SET nombre = '{$this->nombre}', edad ='{$this->edad}', promedio='{$this->promedio}', idsection = '{$this->id_seccion}' WHERE id='{$this->id}'";
 			$this->con->consultaSimple($sql);
 		}
-		public function view()
-		{
-			$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 ON t1.idsection = t2.id WHERE t1.id = '{$this->id}' ";
-			
+		
+		public function view(){
+			$sql = "SELECT t1.*, t2.nombre as nombre_seccion FROM estudiantes t1 INNER JOIN secciones t2 
+					ON t1.idsection = t2.id WHERE t1.id = '{$this->id}'";
 			$datos = $this->con->consultaRetorno($sql);
 			$row = mysqli_fetch_assoc($datos);
-		
 			return $row;
-			
 		}
 
 

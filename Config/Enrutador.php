@@ -18,16 +18,12 @@
 					$datos = call_user_func_array(array($controlador, $metodo), $argumento);
 				}
 			}
-			
-
-			$ruta = ROOT . "Views" . DS . $request->getControlador() . DS . $request->getMetodo().".php";
-			if(is_readable($ruta))
-			{
+			//Cargar vista
+			$ruta = ROOT . "Views" . DS . $request->getControlador() . DS . $request->getMetodo() . ".php";
+			if(is_readable($ruta)){
 				require_once $ruta;
-			}
-			else
-			{
-				print "No se encontro la ruta";
+			}else{
+				print "No se encontro la vista";
 			}
 		}
 	}

@@ -19,7 +19,9 @@ class Conexion
 			$this->datos['user'],
 			$this->datos['pass'],
 			$this->datos['db']
+
 			);
+		
 	}
 
 	public function consultaSimple($sql)
